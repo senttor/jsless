@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+<script>
+    let ulElem = document.createElement("ul")
+    ulElem.classList.add("list-group")
+    document.body.appendChild(ulElem)
+    if (localStorage.getItem("carts")) {
+        let carts = JSON.parse(localStorage.getItem("carts"))
+        let cartsArr = Object.entries(carts)
+        cartsArr.forEach(([k, v]) => {
+            let liElem = document.createElement("li");
+            liElem.classList.add("list-group-item")
+            liElem.innerHTML = `${k}:  ${v}`
+            ulElem.appendChild(liElem)
+        })
+    }
+    let deleteButton = document.createElement("button")
+    deleteButton.setAttribute("type", "button")
+    deleteButton.classList.add("btn")
+    deleteButton.classList.add("btn-danger")
+    deleteButton.innerHTML = 'DELETE'
+    document.body.appendChild(deleteButton)
+
+
+
+    deleteButton.addEventListener("click", (e) => {
+        e.preventDefault()
+        if (confirm("are you sure you want delete?")) {
+            window.localStorage.removeItem("carts")
+        }
+
+    })
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+</html>
